@@ -1,0 +1,27 @@
+{
+  "name": "cinnamon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tsukuyomi212/cinnamon-be.git"
+  },
+  "author": "Nada Zelic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tsukuyomi212/cinnamon-be/issues"
+  },
+  "homepage": "https://github.com/Tsukuyomi212/cinnamon-be#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
