@@ -1,9 +1,13 @@
-const User = require('./../models/userModel');
-const AppError = require('./../utils/appError');
-const catchAsync = require('./../utils/catchAsync');
+const User = require('../models/userModel');
+const AppError = require('../utils/appError');
+const catchAsync = require('../utils/catchAsync');
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find({});
+
+  if (!users.length) {
+    return next(new AppError('Users not found', 404));
+  }
 
   res.status(200).json({
     status: '200',
