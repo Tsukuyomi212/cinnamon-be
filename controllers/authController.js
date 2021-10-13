@@ -13,7 +13,7 @@ const createSendToken = (user, statusCode, res) => {
   user.password = undefined;
 
   res.status(statusCode).json({
-    status: 'Success!',
+    status: statusCode,
     token,
     data: {
       user,
@@ -26,7 +26,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
-    passwordConfirmation: req.body.passwordConfirm,
+    passwordConfirmation: req.body.passwordConfirmation,
+    role: req.body.role,
   });
 
   createSendToken(newUser, 201, res);

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const mongoose = require('mongoose');
 const User = require('../../models/userModel');
 const validateUser = require('../../helpers/validators/userValidators');
