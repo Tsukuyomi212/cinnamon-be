@@ -6,7 +6,7 @@ const users = require('../../seeds/usersSeeds');
 
 const request = supertest(app);
 
-describe('Auth controller', () => {
+describe('Auth integration', () => {
   beforeAll(async () => {
     await mongoose.connect('mongodb://127.0.0.1:27017/auth-controller-tests');
     await User.create(users);

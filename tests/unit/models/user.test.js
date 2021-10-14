@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const User = require('../../models/userModel');
-const validateUser = require('../../helpers/validators/userValidators');
+const User = require('../../../models/userModel');
+const validateUser = require('../../../helpers/validators/userValidators');
 
 describe('User Model Test', () => {
   beforeAll(async () => {
@@ -122,7 +122,6 @@ describe('User Model Test', () => {
 
   afterAll(async () => {
     await User.deleteMany();
-    // Closing the DB connection allows Jest to exit successfully.
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
   });
