@@ -13,7 +13,7 @@ describe('Auth integration', () => {
   });
 
   it('should create new user on signup', async () => {
-    const response = await request.post('/api/users/signup').send({
+    const response = await request.post('/api/auth/signup').send({
       username: 'test123-user',
       email: 'test123@gmail.com',
       password: 'supersecret123',
@@ -26,7 +26,7 @@ describe('Auth integration', () => {
   });
 
   it('should throw an error if username is missing', async () => {
-    const response = await request.post('/api/users/signup').send({
+    const response = await request.post('/api/auth/signup').send({
       email: 'missing-username@gmail.com',
       password: 'supersecret123',
       passwordConfirmation: 'supersecret123',
@@ -37,7 +37,7 @@ describe('Auth integration', () => {
   });
 
   it('should throw an error if email already exists', async () => {
-    const response = await request.post('/api/users/signup').send({
+    const response = await request.post('/api/auth/signup').send({
       username: 'hope123',
       email: 'hope@mail.com',
       password: 'supersecret123',
@@ -49,7 +49,7 @@ describe('Auth integration', () => {
   });
 
   it('should throw an error if passwords do not match', async () => {
-    const response = await request.post('/api/users/signup').send({
+    const response = await request.post('/api/auth/signup').send({
       username: 'hope123',
       email: 'hope-123@mail.com',
       password: 'supersecret123',
@@ -61,7 +61,7 @@ describe('Auth integration', () => {
   });
 
   it('should login user successfully if given correct email and password', async () => {
-    const response = await request.post('/api/users/login').send({
+    const response = await request.post('/api/auth/login').send({
       email: 'hope@mail.com',
       password: 'supersecret123',
     });
@@ -70,7 +70,7 @@ describe('Auth integration', () => {
   });
 
   it('should throw an error on login if password is missing', async () => {
-    const response = await request.post('/api/users/login').send({
+    const response = await request.post('/api/auth/login').send({
       email: 'hope@mail.com',
     });
 
@@ -79,7 +79,7 @@ describe('Auth integration', () => {
   });
 
   it('should throw an error on login if email is missing', async () => {
-    const response = await request.post('/api/users/login').send({
+    const response = await request.post('/api/auth/login').send({
       password: 'supersecret123',
     });
 
@@ -88,7 +88,7 @@ describe('Auth integration', () => {
   });
 
   it('should throw an error if email is not correct', async () => {
-    const response = await request.post('/api/users/login').send({
+    const response = await request.post('/api/auth/login').send({
       email: 'incorrect@mail.com',
       password: 'supersecret123',
     });
@@ -98,7 +98,7 @@ describe('Auth integration', () => {
   });
 
   it('should throw an error if password is not correct', async () => {
-    const response = await request.post('/api/users/login').send({
+    const response = await request.post('/api/auth/login').send({
       email: 'hope@mail.com',
       password: 'incorrect123',
     });
