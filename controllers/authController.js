@@ -15,9 +15,7 @@ const createSendToken = (user, statusCode, res) => {
   res.status(statusCode).json({
     status: statusCode,
     token,
-    data: {
-      user,
-    },
+    user,
   });
 };
 
@@ -47,4 +45,17 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   createSendToken(user, 200, res);
+});
+
+exports.me = catchAsync(async (req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1];
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const authorizedUser = await User.findOne({ _id: decoded.id });
+    return res.status(200).json({
+      user: authorizedUser,
+    });
+  } catch (e) {
+    return next(new AppError('Unauthorized', 401));
+  }
 });

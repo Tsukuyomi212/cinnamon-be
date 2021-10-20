@@ -21,8 +21,8 @@ describe('Auth integration', () => {
     });
 
     expect(response.status).toBe(201);
-    expect(response.body.data.user._id).toBeDefined();
-    expect(response.body.data.user.username).toBe('test123-user');
+    expect(response.body.user._id).toBeDefined();
+    expect(response.body.user.username).toBe('test123-user');
   });
 
   it('should throw an error if username is missing', async () => {
@@ -105,6 +105,22 @@ describe('Auth integration', () => {
 
     expect(response.status).toBe(401);
     expect(response.body.message).toBe('Incorrect email or password');
+  });
+
+  it('endpoint /me should return authenticated user if there is one', async () => {
+    const loginResponse = await request.post('/api/auth/login').send({
+      email: 'hope@mail.com',
+      password: 'supersecret123',
+    });
+    expect(loginResponse.status).toBe(200);
+    const user = loginResponse.body.user;
+    const token = loginResponse.body.token;
+
+    const meResponse = await supertest(app)
+      .get('/api/auth/me')
+      .set('Authorization', `Bearer ${token}`);
+    expect(meResponse.status).toBe(200);
+    expect(meResponse.body.user._id).toBe(user._id);
   });
 
   afterAll(async () => {
