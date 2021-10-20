@@ -15,7 +15,7 @@ describe('Users integration - crud', () => {
   it('should be able to fetch users from database', async () => {
     const response = await request.get('/api/users');
     expect(response.status).toBe(200);
-    expect(response.body.data.users.length).toBeGreaterThan(0);
+    expect(response.body.users.length).toBeGreaterThan(0);
   });
 
   it('should be able to fetch single user from database given user id', async () => {
@@ -28,7 +28,7 @@ describe('Users integration - crud', () => {
 
     const response = await request.get(`/api/users/${newUser._id}`);
     expect(response.status).toBe(200);
-    expect(response.body.data.user.username).toMatch(newUser.username);
+    expect(response.body.user.username).toMatch(newUser.username);
   });
 
   it('should throw a 404 on fetch single user if said user does not exist in the DB', async () => {
