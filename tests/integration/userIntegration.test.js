@@ -63,6 +63,18 @@ describe('Users integration - crud', () => {
     expect(response.body.message).toBe('Users not found');
   });
 
+  it('should create new user when given valid data', async () => {
+    const validUser = {
+      username: 'test-user',
+      email: 'test@mail.com',
+      password: 'supersecret123',
+      passwordConfirmation: 'supersecret123',
+    };
+
+    const response = await request.post('/api/users').send(validUser);
+    expect(response.status).toBe(201);
+  });
+
   afterAll(async () => {
     await User.deleteMany();
     await mongoose.connection.dropDatabase();

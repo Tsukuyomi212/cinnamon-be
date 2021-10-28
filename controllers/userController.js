@@ -28,6 +28,26 @@ exports.getUser = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.createUser = catchAsync(async (req, res, next) => {
+  try {
+    const newUser = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      passwordConfirmation: req.body.passwordConfirmation,
+      role: req.body.role,
+    });
+
+    res.status(201).json({
+      status: '201',
+      user: newUser,
+    });
+  } catch (e) {
+    console.log(e);
+    return next(new AppError('There was an error creating user', 500));
+  }
+});
+
 exports.deleteUser = catchAsync(async (req, res, next) => {
   const user = await User.findByIdAndDelete(req.params.id);
   if (!user) {
